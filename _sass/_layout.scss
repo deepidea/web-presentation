@@ -1,0 +1,110 @@
+/**
+ * Site header
+ */
+.site-header {
+    border-bottom: 1px solid $grey-color-light;
+    text-align: center;
+    padding: 1rem 0;
+}
+
+.site-title {
+    font-size: 1.5rem;
+    font-weight: 300;
+    letter-spacing: -1px;
+    color: $grey-color-dark;
+
+    &,
+    &:hover {
+        text-decoration: none;
+    }
+}
+
+
+
+/**
+ * Page content
+ */
+.page-content {
+    position: relative;
+    max-width: 48rem;
+    padding: $spacing-unit ($spacing-unit * 0.75);
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+
+/**
+ * Pages
+ */
+.home {
+    section + section {
+        margin-top: $spacing-unit;
+    }
+}
+
+.smallcap {
+    text-transform: lowercase;
+    font-variant: small-caps;
+
+    &::first-letter {
+        text-transform: uppercase;
+    }
+}
+
+.post-list > li {
+    margin-bottom: $spacing-unit / 4;
+
+    @include media-query($on-palm) {
+        time {
+            display: block;
+            font-size: $small-font-size;
+        }
+    }
+}
+
+
+
+/**
+ * Posts
+ */
+.post-header {
+    margin-bottom: $spacing-unit;
+}
+
+.post-title {
+    font-size: 2rem;
+    letter-spacing: -1px;
+    line-height: 1;
+}
+
+.post-meta {
+    font-size: $small-font-size;
+    color: $grey-color;
+}
+
+.post-content {
+    margin-bottom: $spacing-unit;
+
+    h1, h2, h3,
+    h4, h5, h6 {
+        margin-top: 2rem;
+    }
+
+    h1,
+    h2 {
+        font-size: 2rem;
+    }
+
+    h3 {
+        font-size: 1.5rem;
+    }
+
+    h4 {
+        font-size: 1.25rem;
+    }
+
+    h5,
+    h6 {
+        font-size: 1rem;
+    }
+}
