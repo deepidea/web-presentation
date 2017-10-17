@@ -2,4 +2,4 @@
 layout: post
 ---
 
-##Configuration: json path
+##Configuration: json path. Analyse, transform, and selectively extract data from JSON documents

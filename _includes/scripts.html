@@ -1,5 +1,166 @@
 <script src="lib/js/head.min.js"></script>
 <script src="js/reveal.js"></script>
+<script src="js/json-table.js"></script>
+
+<script type="text/javascript">
+    function dataProviderFunction() {
+        function TableDataGenerator() {
+            this.data = [];
+            this.teachers = [
+                {
+                    "firstName": "John",
+                    "lastName": "Smith",
+                    "age": 30,
+                    "cellPhone": "+380123456789",
+                },
+                {
+                    "firstName": "Medie",
+                    "lastName": "Lorn",
+                    "age": 50,
+                    "cellPhone": "+380987654321",
+                },
+                {
+                    "firstName": "Olsom",
+                    "lastName": "Clarke",
+                    "age": 42,
+                    "cellPhone": "+385678901234",
+                },
+                {
+                    "firstName": "Simon",
+                    "lastName": "Peres",
+                    "age": 39,
+                    "cellPhone": "+386789012345",
+                },
+            ];
+            this.students = [
+                {
+                    "firstName": "Nuke",
+                    "lastName": "Duke",
+                    "age": 20,
+                    "cellPhone": "+380987654321",
+                },
+                {
+                    "firstName": "Irma",
+                    "lastName": "Nested",
+                    "age": 16,
+                    "cellPhone": "+385678901234",
+                },
+                {
+                    "firstName": "Oli",
+                    "lastName": "Jurank",
+                    "age": 21,
+                    "cellPhone": "+386789012345",
+                },
+                {
+                    "firstName": "Park",
+                    "lastName": "Suzzie",
+                    "age": 20,
+                    "cellPhone": "+380123456789",
+                },
+            ];
+            this.projects = [
+                {
+                    "name": "React-redux testing system",
+                    "description": "Because most of the Redux code you write are functions, and many of them are pure, they are easy to test without mocking.",
+                    "deadline": "2018-10-27",
+                },
+                {
+                    "name": "Sunday school classroom journal",
+                    "description": "Journal writing in the classroom can take many forms. Some teachers use journal writing to meet specific goals; others use journals for more fluid purposes.",
+                    "deadline": "2019-10-27",
+                },
+                {
+                    "name": "Indicator",
+                    "description": "A system of classifying or ranking something on a particular scale.",
+                    "deadline": "2020-10-27",
+                },
+            ];
+            this.notes = "JavaScript (JS) is a lightweight interpreted or JIT-compiled programming language with first-class functions. While it is most well-known as the scripting language for Web pages, many non-browser environments also use it, such as node.js, Apache CouchDB and Adobe Acrobat. JavaScript is a prototype-based, multi-paradigm, dynamic language, supporting object-oriented, imperative, and declarative (e.g. functional programming) styles. Read more about JavaScript.";
+            this.terms = "Please read the terms of this entire document  (“Terms”) carefully because it explains your rights and responsibilities when you visit any of Mozilla’s websites (“Websites”), or related feeds, social media, newsletters, source code repositories, and emails (together with Websites, these are collectively referred to as “Communications”). By accessing or signing up to receive Communications, you agree to be bound by these Terms.";
+            this.agreement = "Learning agreements are written agreements with a student meant to support students experiencing significant difficulties by agreeing a way to address problems such as, for example, attendance problems, coursework submission problems, communications problems, welfare concerns, problems with administrative requirements, etc.";
+            this.LENGTH = 49;
+        }
+        (function() {
+            this.fetchRandomList = function (list) {
+                let randomList = [];
+
+                for( let i = 1, min = 0, max = list.length - 1; i < this.LENGTH; i++ ) {
+                    let id = min + Math.floor(Math.random() * (max + 1 - min));
+
+                    randomList[randomList.length] = Object.assign({id: i}, list[id]);
+                }
+
+                return randomList;
+            };
+            this.fetchTeachersList = function (_this) {
+                let teachersList = this.fetchRandomList(_this.teachers);
+
+                teachersList.forEach(function (teacher, i, teachers) {
+                    teachers[i].notes = _this.notes;
+                    teachers[i].terms = _this.terms;
+                });
+
+                return teachersList;
+            };
+            this.fetchStudentsList = function (_this) {
+                let studentsList = this.fetchRandomList(_this.students);
+
+                studentsList.forEach(function (student, i, students) {
+                    students[i].agreement = _this.agreement;
+                });
+
+                return studentsList;
+            };
+            this.fetchProjectsList = function (_this) {
+                let projectsList = this.fetchRandomList(_this.projects);
+
+                projectsList.forEach(function (project, i, projects) {
+                    let id = Math.floor(Math.random() * (_this.students.length));
+
+                    projects[i].manager = _this.students[id].firstName;
+                });
+
+                return projectsList;
+            };
+            this.generate = function() {
+                return {
+                    teachers: this.fetchTeachersList(this),
+                    students: this.fetchStudentsList(this),
+                    projects: this.fetchProjectsList(this),
+                }
+            };
+        }).call(TableDataGenerator.prototype);
+
+        let data =  new TableDataGenerator();
+
+        return data.generate();
+    }
+
+</script>
+<script type="text/javascript">
+    function ajaxDataProviderFunction(){
+        return $.ajax({
+            dataType: 'json',
+            url: 'https://raw.githubusercontent.com/kupolua/web-presentation/master/json/db.json',
+            success: function(jsondata){
+
+                return jsondata;
+            }
+        });
+    }
+</script>
+<script type="text/javascript">
+    function hookFunction(rowData){
+        console.log('\'on row selected\' hook result', rowData);
+    }
+</script>
+<script type="text/javascript">
+    function fetchSelectedRows(id){
+        let selectedRows = jsonTableFunctions.fetchSelectedRows(id);
+
+        console.log(selectedRows)
+    }
+</script>
 
 <script>
 
@@ -15,11 +176,11 @@
         // More info https://github.com/hakimel/reveal.js#dependencies
         dependencies: [
             { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
-            { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-            { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-            { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-            { src: 'plugin/zoom-js/zoom.js', async: true },
-            { src: 'plugin/notes/notes.js', async: true }
+//            { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+//            { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+//            { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+//            { src: 'plugin/zoom-js/zoom.js', async: true },
+//            { src: 'plugin/notes/notes.js', async: true }
         ]
     });
 

@@ -2,10 +2,6 @@
 layout: post
 ---
 
-## Fetch data using data generator
+## Example
 
-```
-let data =  new TableDataGenerator(); 
-    
-return data.generate();
-```
+<iframe width="100%" height="600" src="https://kupolua.github.io/json-to-table/html/" frameborder="0" allowfullscreen></iframe>

@@ -2,4 +2,10 @@
 layout: post
 ---
 
-## Analyse, transform, and selectively extract data from JSON documents
+## Fetch data using data generator
+
+```
+let data =  new TableDataGenerator(); 
+    
+return data.generate();
+```
