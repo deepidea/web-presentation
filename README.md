@@ -4,7 +4,7 @@ Project is designed to quickly build presentation as a web page.
 
 To create your presentation just fork this repository.
 
-presentation example https://deepidea.github.io/web-presentation/
+presentation example https://kupolua.github.io/web-presentation/
 
 **NOTES**
 - Files names should start wil valid year-month-day
