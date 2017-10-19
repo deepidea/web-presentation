@@ -1,5 +1,5 @@
 ---
 layout: post
 ---
-INPUT json table example with "show selected rows" button which display selected rows in alert message
+<iframe width="1600" height="600" src="https://kupolua.github.io/json-to-table/html/fetch-selected-rows.html" frameborder="0" allowfullscreen></iframe>
 
