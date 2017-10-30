@@ -7,7 +7,7 @@ To create your presentation just fork this repository.
 presentation example https://deepidea.github.io/web-presentation/
 
 **NOTES**
-- Files names should start wil valid year-month-day
+- Files names should start with valid year-month-day format
 
 - Presentation pages will be displayed in chronological order
 
